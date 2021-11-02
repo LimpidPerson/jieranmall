@@ -6,7 +6,7 @@
     <artifactId>gulimall</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>gulimall</name>
-    <description>聚合X服务</description>
+    <description>聚合服务</description>
     <packaging>pom</packaging>
 
     <modules>
