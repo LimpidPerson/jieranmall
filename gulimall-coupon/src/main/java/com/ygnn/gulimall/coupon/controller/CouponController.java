@@ -5,6 +5,8 @@ import com.ygnn.common.utils.R;
 import com.ygnn.gulimall.coupon.entity.CouponEntity;
 import com.ygnn.gulimall.coupon.service.CouponService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
@@ -19,13 +21,25 @@ import java.util.Map;
  * @email liufangkun1008@163.com
  * @date 2021-11-04 08:24:26
  */
+@RefreshScope
 @RestController
 @RequestMapping("coupon/coupon")
 public class CouponController {
     @Autowired
     private CouponService couponService;
 
-    @RequestMapping("member/list")
+    @Value("${name}")
+    private String name;
+
+    @Value("${age}")
+    private Integer age;
+
+    @RequestMapping("/test")
+    public R test(){
+        return R.ok().put("username", name).put("userage", age);
+    }
+
+    @RequestMapping("/member/list")
     public R memberCoupons(){
         CouponEntity coupon = new CouponEntity();
         coupon.setCouponName("满100减10");
@@ -42,7 +56,6 @@ public class CouponController {
 
         return R.ok().put("page", page);
     }
-
 
     /**
      * 信息

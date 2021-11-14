@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: gulimall-coupon
+  cloud:
+    nacos:
+      config:
+        server-addr: 127.0.0.1:8848
+        namespace: 332eee42-0e05-4fb1-ae09-27c40775e7b5
+        group: prod
+
+        extension-configs[0].data-id: datasource.yaml
+        extension-configs[0].group: dev
+        extension-configs[0].refresh: true
+
+        extension-configs[1].data-id: mybatis.yaml
+        extension-configs[1].group: dev
+        extension-configs[1].refresh: true
+
+        extension-configs[2].data-id: other.yaml
+        extension-configs[2].group: dev
+        extension-configs[2].refresh: true

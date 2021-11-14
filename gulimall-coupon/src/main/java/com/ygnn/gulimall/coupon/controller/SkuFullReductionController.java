@@ -1,20 +1,15 @@
 package com.ygnn.gulimall.coupon.controller;
 
-import java.util.Arrays;
-import java.util.Map;
-
-//import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.ygnn.gulimall.coupon.entity.SkuFullReductionEntity;
-import com.ygnn.gulimall.coupon.service.SkuFullReductionService;
+import com.ygnn.common.to.SkuReductionTo;
 import com.ygnn.common.utils.PageUtils;
 import com.ygnn.common.utils.R;
+import com.ygnn.gulimall.coupon.entity.SkuFullReductionEntity;
+import com.ygnn.gulimall.coupon.service.SkuFullReductionService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Arrays;
+import java.util.Map;
 
 
 
@@ -30,6 +25,13 @@ import com.ygnn.common.utils.R;
 public class SkuFullReductionController {
     @Autowired
     private SkuFullReductionService skuFullReductionService;
+
+    @PostMapping("/saveinfo")
+    public R saveInfo(@RequestBody SkuReductionTo skuReductionTo){
+        skuFullReductionService.saveSkuReduction(skuReductionTo);
+
+        return R.ok();
+    }
 
     /**
      * 列表

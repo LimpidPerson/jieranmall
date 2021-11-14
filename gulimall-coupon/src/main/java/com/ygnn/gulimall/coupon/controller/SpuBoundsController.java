@@ -1,20 +1,15 @@
 package com.ygnn.gulimall.coupon.controller;
 
-import java.util.Arrays;
-import java.util.Map;
-
-//import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.ygnn.gulimall.coupon.entity.SpuBoundsEntity;
-import com.ygnn.gulimall.coupon.service.SpuBoundsService;
+import com.ygnn.common.to.SpuBoundTo;
 import com.ygnn.common.utils.PageUtils;
 import com.ygnn.common.utils.R;
+import com.ygnn.gulimall.coupon.entity.SpuBoundsEntity;
+import com.ygnn.gulimall.coupon.service.SpuBoundsService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Arrays;
+import java.util.Map;
 
 
 
@@ -57,11 +52,10 @@ public class SpuBoundsController {
     /**
      * 保存
      */
-    @RequestMapping("/save")
+    @PostMapping("/save")
     //@RequiresPermissions("coupon:spubounds:save")
-    public R save(@RequestBody SpuBoundsEntity spuBounds){
-		spuBoundsService.save(spuBounds);
-
+    public R save(@RequestBody SpuBoundTo spuBoundTo){
+		// spuBoundsService.save(spuBounds);
         return R.ok();
     }
 
