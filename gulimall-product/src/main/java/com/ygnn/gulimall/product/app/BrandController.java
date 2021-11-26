@@ -1,4 +1,4 @@
-package com.ygnn.gulimall.product.controller;
+package com.ygnn.gulimall.product.app;
 
 import com.ygnn.common.utils.PageUtils;
 import com.ygnn.common.utils.R;
@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 
@@ -47,8 +48,13 @@ public class BrandController {
     //@RequiresPermissions("product:brand:info")
     public R info(@PathVariable("brandId") Long brandId){
 		BrandEntity brand = brandService.getById(brandId);
-
         return R.ok().put("brand", brand);
+    }
+
+    @GetMapping("/infos")
+    public R info(@RequestParam("brandIds") List<Long> brandIds){
+        List<BrandEntity> brands = brandService.getBrandsByIds(brandIds);
+        return R.ok().put("brands", brands);
     }
 
     /**

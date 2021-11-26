@@ -1,5 +1,6 @@
 package com.ygnn.gulimall.ware.controller;
 
+import com.ygnn.common.to.SkuHahStockVo;
 import com.ygnn.common.utils.PageUtils;
 import com.ygnn.common.utils.R;
 import com.ygnn.gulimall.ware.entity.WareSkuEntity;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 
@@ -24,6 +26,17 @@ import java.util.Map;
 public class WareSkuController {
     @Autowired
     private WareSkuService wareSkuService;
+
+    /**
+     * 查询sku是否有库存
+     * @param skuIds
+     * @return
+     */
+    @PostMapping("/hasstock")
+    public R getSkuHasStock(@RequestBody List<Long> skuIds){
+        List<SkuHahStockVo> vos = wareSkuService.getSkuHasStock(skuIds);
+        return R.ok().setData(vos);
+    }
 
     /**
      * 列表

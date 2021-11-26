@@ -1,4 +1,4 @@
-package com.ygnn.gulimall.product.controller;
+package com.ygnn.gulimall.product.app;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.ygnn.common.utils.PageUtils;

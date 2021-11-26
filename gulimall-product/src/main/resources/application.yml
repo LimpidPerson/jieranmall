@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.134.140:3306/gulimall_pms?createDatabaseIfNotExist=true&useSSL=false
+    url: jdbc:mysql://192.168.134.156:3306/gulimall_pms?createDatabaseIfNotExist=true&useSSL=false
     username: root
     password: root
   cloud:
@@ -13,9 +13,22 @@ spring:
       secret-key: rPRbkAMAmDfULqOIYRcU5RkMWI2LIy
       oss:
         endpoint: oss-cn-shenzhen.aliyuncs.com
+  redis:
+    host: 192.168.134.156
+    port: 6379
+  cache:
+    type: redis
+    redis:
+      time-to-live: 6000000
+      # key-prefix: CACHE_
+      use-key-prefix: true
+      cache-null-values: true
 
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
+
+  thymeleaf:
+    cache: false
 
 
 mybatis-plus:

@@ -3,6 +3,7 @@ package com.ygnn.gulimall.search.vo;
 import com.ygnn.common.to.es.SkuEsModel;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -32,6 +33,11 @@ public class SearchResult {
     private Integer totalPages;
 
     /**
+     * 页码数组
+     */
+    private List<Integer> pageNavs;
+
+    /**
      * 当前查询到的结果，所有涉及到的所有品牌
      */
     private List<BrandVo> brands;
@@ -47,6 +53,24 @@ public class SearchResult {
     private List<AttrVo> attrs;
 
     //=========以上是返回给页面的所有信息=========
+
+    /**
+     * 面包屑导航数据
+     */
+    private List<NavVo> navs = new ArrayList<>();
+
+    private List<Long> attrIds = new ArrayList<>();
+
+    @Data
+    public static class NavVo{
+
+        private String navName;
+
+        private String navValue;
+
+        private String link;
+
+    }
 
     @Data
     public static class BrandVo{

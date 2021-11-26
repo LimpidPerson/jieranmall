@@ -1,4 +1,4 @@
-package com.ygnn.gulimall.product.controller;
+package com.ygnn.gulimall.product.app;
 
 import com.ygnn.common.utils.PageUtils;
 import com.ygnn.common.utils.R;

@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.134.140:3306/gulimall_ums
+    url: jdbc:mysql://192.168.134.156:3306/gulimall_ums
     username: root
     password: root
   cloud:

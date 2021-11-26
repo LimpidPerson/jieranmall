@@ -1,4 +1,4 @@
-package com.ygnn.gulimall.product.controller;
+package com.ygnn.gulimall.product.app;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -11,33 +11,33 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ygnn.gulimall.product.entity.CommentReplayEntity;
-import com.ygnn.gulimall.product.service.CommentReplayService;
+import com.ygnn.gulimall.product.entity.SkuImagesEntity;
+import com.ygnn.gulimall.product.service.SkuImagesService;
 import com.ygnn.common.utils.PageUtils;
 import com.ygnn.common.utils.R;
 
 
 
 /**
- * 商品评价回复关系
+ * sku图片
  *
  * @author Limpid
  * @email liufangkun1008@163.com
  * @date 2021-11-03 21:34:54
  */
 @RestController
-@RequestMapping("product/commentreplay")
-public class CommentReplayController {
+@RequestMapping("product/skuimages")
+public class SkuImagesController {
     @Autowired
-    private CommentReplayService commentReplayService;
+    private SkuImagesService skuImagesService;
 
     /**
      * 列表
      */
     @RequestMapping("/list")
-    //@RequiresPermissions("product:commentreplay:list")
+    //@RequiresPermissions("product:skuimages:list")
     public R list(@RequestParam Map<String, Object> params){
-        PageUtils page = commentReplayService.queryPage(params);
+        PageUtils page = skuImagesService.queryPage(params);
 
         return R.ok().put("page", page);
     }
@@ -47,20 +47,20 @@ public class CommentReplayController {
      * 信息
      */
     @RequestMapping("/info/{id}")
-    //@RequiresPermissions("product:commentreplay:info")
+    //@RequiresPermissions("product:skuimages:info")
     public R info(@PathVariable("id") Long id){
-		CommentReplayEntity commentReplay = commentReplayService.getById(id);
+		SkuImagesEntity skuImages = skuImagesService.getById(id);
 
-        return R.ok().put("commentReplay", commentReplay);
+        return R.ok().put("skuImages", skuImages);
     }
 
     /**
      * 保存
      */
     @RequestMapping("/save")
-    //@RequiresPermissions("product:commentreplay:save")
-    public R save(@RequestBody CommentReplayEntity commentReplay){
-		commentReplayService.save(commentReplay);
+    //@RequiresPermissions("product:skuimages:save")
+    public R save(@RequestBody SkuImagesEntity skuImages){
+		skuImagesService.save(skuImages);
 
         return R.ok();
     }
@@ -69,9 +69,9 @@ public class CommentReplayController {
      * 修改
      */
     @RequestMapping("/update")
-    //@RequiresPermissions("product:commentreplay:update")
-    public R update(@RequestBody CommentReplayEntity commentReplay){
-		commentReplayService.updateById(commentReplay);
+    //@RequiresPermissions("product:skuimages:update")
+    public R update(@RequestBody SkuImagesEntity skuImages){
+		skuImagesService.updateById(skuImages);
 
         return R.ok();
     }
@@ -80,9 +80,9 @@ public class CommentReplayController {
      * 删除
      */
     @RequestMapping("/delete")
-    //@RequiresPermissions("product:commentreplay:delete")
+    //@RequiresPermissions("product:skuimages:delete")
     public R delete(@RequestBody Long[] ids){
-		commentReplayService.removeByIds(Arrays.asList(ids));
+		skuImagesService.removeByIds(Arrays.asList(ids));
 
         return R.ok();
     }
