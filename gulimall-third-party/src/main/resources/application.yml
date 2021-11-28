@@ -9,6 +9,12 @@ spring:
       oss:
         endpoint: oss-cn-shenzhen.aliyuncs.com
         bucket: gulimall-1008
+      sms:
+        host: https://fesms.market.alicloudapi.com
+        path: /sms/
+        skin: 1
+        sign: 11
+        appcode: 1aa303d2448e4a2cba38c17deb3c7e2e
   application:
     name: gulimall-third-party
 
