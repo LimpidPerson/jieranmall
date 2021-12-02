@@ -23,12 +23,12 @@ spring:
       # key-prefix: CACHE_
       use-key-prefix: true
       cache-null-values: true
-
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
-
   thymeleaf:
     cache: false
+  session:
+    store-type: redis
 
 
 mybatis-plus:

@@ -1,6 +1,7 @@
 package com.ygnn.gulimall.authserver.feign;
 
 import com.ygnn.common.utils.R;
+import com.ygnn.gulimall.authserver.vo.SocialUser;
 import com.ygnn.gulimall.authserver.vo.UserLoginVo;
 import com.ygnn.gulimall.authserver.vo.UserRegisterVo;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -18,5 +19,11 @@ public interface MemberFeignService {
 
     @PostMapping("/member/member/login")
     R Login(@RequestBody UserLoginVo vo);
+
+    @PostMapping("/member/member/gitee/login")
+    R oauthGiteeLogin(@RequestBody SocialUser socialUser);
+
+    @PostMapping("/member/member/weibo/login")
+    R oauthWeiboLogin(@RequestBody SocialUser socialUser);
 
 }

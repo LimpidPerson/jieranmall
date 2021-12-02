@@ -18,7 +18,7 @@
         <b class="header_head_p">
             <div style="overflow: hidden">
                 <a href="http://gulimall.com" class="header_head_p_a1" style="width:73px;">
-                    子然商城首页
+                    孑然商城首页
                 </a>
                 <a href="/static/search/#" class="header_head_p_a">
                     <!--<img src="/static/search/img/img_05.png" style="border-radius: 50%;"/>-->
@@ -64,10 +64,11 @@
         </b>
         <ul>
             <li>
-                <a href="/static/search/#" class="li_2">你好，请登录</a>
+                <a href="http://auth.gulimall.com/login.html" th:if="${session.loginUser == null}" class="li_2">你好，请登录</a>
+                <a th:if="${session.loginUser != null}">欢迎: [[${session.loginUser.nickname}]]</a>
             </li>
             <li>
-                <a href="/static/search/#">免费注册</a>
+                <a th:if="${session.loginUser == null}" href="http://auth.gulimall.com/reg.html">免费注册</a>
             </li>
             <span>|</span>
             <li>
@@ -75,7 +76,7 @@
             </li>
             <span>|</span>
             <li class="header_wdjd" style="width:80px;">
-                <a href="/static/search/#">我的子然商城</a>
+                <a href="/static/search/#">我的孑然商城</a>
                 <img src="/static/search/image/down-@1x.png" />
                 <!--<b class="glyphicon glyphicon-menu-down"></b>-->
                 <div class="header_wdjd_txt">
@@ -117,7 +118,7 @@
             </li>
             <span>|</span>
             <li>
-                <a href="/static/search/#">子然商城会员</a>
+                <a href="/static/search/#">孑然商城会员</a>
             </li>
             <span>|</span>
             <li>
@@ -188,10 +189,10 @@
                     <ul style="width: 25%;">
                         <p style="width:100%;">特色主题</p>
                         <li>
-                            <a href="/static/search/#">子然商城试用</a>
+                            <a href="/static/search/#">孑然商城试用</a>
                         </li>
                         <li>
-                            <a href="/static/search/#">子然商城金融</a>
+                            <a href="/static/search/#">孑然商城金融</a>
                         </li>
                         <li>
                             <a href="/static/search/#">全球售</a>
@@ -200,10 +201,10 @@
                             <a href="/static/search/#">国际站</a>
                         </li>
                         <li>
-                            <a href="/static/search/#">子然商城会员</a>
+                            <a href="/static/search/#">孑然商城会员</a>
                         </li>
                         <li>
-                            <a href="/static/search/#">子然商城预售</a>
+                            <a href="/static/search/#">孑然商城预售</a>
                         </li>
                         <li>
                             <a href="/static/search/#">买什么</a>
@@ -236,7 +237,7 @@
                             <a href="/static/search/#">印尼站</a>
                         </li>
                         <li>
-                            <a href="/static/search/#">子然商城金融科技</a>
+                            <a href="/static/search/#">孑然商城金融科技</a>
                         </li>
                         <li>
                             <a href="/static/search/#">In货推荐</a>
@@ -266,7 +267,7 @@
                             <a href="/static/search/#">家用电器</a>
                         </li>
                         <li>
-                            <a href="/static/search/#">子然商城智能</a>
+                            <a href="/static/search/#">孑然商城智能</a>
                         </li>
                         <li>
                             <a href="/static/search/#">服装城</a>
@@ -302,10 +303,10 @@
                             <a href="/static/search/#">白条</a>
                         </li>
                         <li>
-                            <a href="/static/search/#">子然商城金融App</a>
+                            <a href="/static/search/#">孑然商城金融App</a>
                         </li>
                         <li>
-                            <a href="/static/search/#">子然商城小金库</a>
+                            <a href="/static/search/#">孑然商城小金库</a>
                         </li>
                         <li>
                             <a href="/static/search/#">理财</a>
@@ -332,10 +333,10 @@
                             <a href="/static/search/#">电影票</a>
                         </li>
                         <li>
-                            <a href="/static/search/#">子然商城到家</a>
+                            <a href="/static/search/#">孑然商城到家</a>
                         </li>
                         <li>
-                            <a href="/static/search/#">子然商城众测</a>
+                            <a href="/static/search/#">孑然商城众测</a>
                         </li>
                         <li>
                             <a href="/static/search/#">游戏</a>
@@ -347,10 +348,10 @@
                             <a href="/static/search/#">合作招商</a>
                         </li>
                         <li>
-                            <a href="/static/search/#">子然商城通信</a>
+                            <a href="/static/search/#">孑然商城通信</a>
                         </li>
                         <li>
-                            <a href="/static/search/#">子然商城E卡</a>
+                            <a href="/static/search/#">孑然商城E卡</a>
                         </li>
                         <li>
                             <a href="/static/search/#">企业采购</a>
@@ -371,7 +372,7 @@
                             <a href="/static/search/#">京友帮</a>
                         </li>
                         <li>
-                            <a href="/static/search/#">子然商城社区</a>
+                            <a href="/static/search/#">孑然商城社区</a>
                         </li>
                         <li>
                             <a href="/static/search/#">智能社区</a>
@@ -387,7 +388,7 @@
             </li>
             <span>|</span>
             <li class="header_sjjd">
-                <a href="/static/search/#">手机子然商城</a>
+                <a href="/static/search/#">手机孑然商城</a>
                 <div class="header_sjjd_div">
                     <img src="/static/search/img/01.png" />
                 </div>
@@ -418,10 +419,10 @@
     <div class="header_form_nav">
         <ul>
             <li>
-                <a href="/static/search/#">子然商城之家</a>
+                <a href="/static/search/#">孑然商城之家</a>
             </li>
             <li>
-                <a href="/static/search/#">子然商城专卖店</a>
+                <a href="/static/search/#">孑然商城专卖店</a>
             </li>
             <li>
                 <a href="/static/search/#">平板</a>
@@ -505,7 +506,7 @@
                             <a href="/static/search/#" style="color: #999;">中国电信</a>
                             <a href="/static/search/#" style="color: #999;">中国移动</a>
                             <a href="/static/search/#" style="color: #999;">中国联通</a>
-                            <a href="/static/search/#" style="color: #999;">子然商城通信</a>
+                            <a href="/static/search/#" style="color: #999;">孑然商城通信</a>
                             <a href="/static/search/#" style="color: #999;">170选号</a>
                         </li>
                         <a href="/static/search/#" style="color: #111;" class="aaa">手机配件 ></a>
@@ -1128,7 +1129,7 @@
                                 <li>
                                     <a href="/static/search/#">
                                         <i></i>
-                                        子然商城配送
+                                        孑然商城配送
                                     </a>
                                 </li>
                                 <li>
@@ -1185,7 +1186,7 @@
                             <p class="tab_PI">已有<span>11万+</span>热门评价
                                 <a href="/static/search/#">二手有售</a>
                             </p>
-                            <p class="tab_CP"><a href="/static/search/#" title="子然商城Apple产品专营店">子然商城Apple产品...</a>
+                            <p class="tab_CP"><a href="/static/search/#" title="孑然商城Apple产品专营店">孑然商城Apple产品...</a>
                                 <a href='#' title="联系供应商进行咨询">
                                     <img src="/static/search/img/xcxc.png">
                                 </a>
@@ -1193,7 +1194,7 @@
                             <div class="tab_FO">
                                 <div class="FO_one">
                                     <p>自营
-                                        <span>子然商城自营,品质保证</span>
+                                        <span>孑然商城自营,品质保证</span>
                                     </p>
                                     <p>满赠
                                         <span>该商品参加满赠活动</span>
@@ -1681,17 +1682,17 @@
             </li>
             <li><a href="/static/search/#" style="color: rgb(114, 114, 114);">延保服务</a>
             </li>
-            <li><a href="/static/search/#" style="color: rgb(114, 114, 114);">子然商城E卡</a>
+            <li><a href="/static/search/#" style="color: rgb(114, 114, 114);">孑然商城E卡</a>
             </li>
-            <li><a href="/static/search/#" style="color: rgb(114, 114, 114);">子然商城通信</a>
+            <li><a href="/static/search/#" style="color: rgb(114, 114, 114);">孑然商城通信</a>
             </li>
-            <li><a href="/static/search/#" style="color: rgb(114, 114, 114);">子然商城gulimall+</a>
+            <li><a href="/static/search/#" style="color: rgb(114, 114, 114);">孑然商城gulimall+</a>
             </li>
         </ol>
         <ol>
-            <li>子然商城自营覆盖区域</li>
+            <li>孑然商城自营覆盖区域</li>
             <li>
-                子然商城已向全国2661个区县提供自<br> 营配送服务，支持货到付款、
+                孑然商城已向全国2661个区县提供自<br> 营配送服务，支持货到付款、
                 <br> POS机刷卡和售后上门服务。
             </li>
             <li><a href="/static/search/#" style="color: rgb(114, 114, 114);">查看详情&gt;</a>
@@ -1712,19 +1713,19 @@
             <span></span>
             <a href="/static/search/#" style="color: rgb(114, 114, 114);">营销中心</a>
             <span></span>
-            <a href="/static/search/#" style="color: rgb(114, 114, 114);">手机子然商城</a>
+            <a href="/static/search/#" style="color: rgb(114, 114, 114);">手机孑然商城</a>
             <span></span>
             <a href="/static/search/#" style="color: rgb(114, 114, 114);">友情链接</a>
             <span></span>
             <a href="/static/search/#" style="color: rgb(114, 114, 114);">销售联盟</a>
             <span></span>
-            <a href="/static/search/#" style="color: rgb(114, 114, 114);">子然商城社区</a>
+            <a href="/static/search/#" style="color: rgb(114, 114, 114);">孑然商城社区</a>
             <span></span>
             <a href="/static/search/#" style="color: rgb(114, 114, 114);">风险监测</a>
             <span></span>
             <a href="/static/search/#">隐私政策</a>
             <span></span>
-            <a href="/static/search/#">子然商城公益</a>
+            <a href="/static/search/#">孑然商城公益</a>
             <span></span>
             <a href="/static/search/#" style="color: rgb(114, 114, 114);">English Site</a>
             <span></span>
@@ -1749,16 +1750,16 @@
             <a href="/static/search/#">违法和不良信息举报电话：4006561155</a>
         </p>
         <p class="footer_p">
-            <a href="/static/search/#">Copyright © 2004 - 2017  子然商城JD.com 版权所有</a>
+            <a href="/static/search/#">Copyright © 2004 - 2017  孑然商城JD.com 版权所有</a>
             <span></span>
             <a href="/static/search/#">消费者维权热线：4006067733</a>
             <a href="/static/search/#">经营证照</a>
         </p>
         <p class="footer_p">
-            <a href="/static/search/#">子然商城旗下网站:</a>
-            <a href="/static/search/#">子然商城支付</a>
+            <a href="/static/search/#">孑然商城旗下网站:</a>
+            <a href="/static/search/#">孑然商城支付</a>
             <span></span>
-            <a href="/static/search/#">子然商城云</a>
+            <a href="/static/search/#">孑然商城云</a>
         </p>
         <ul>
             <li></li>
@@ -1778,7 +1779,7 @@
             <li>
                 <a href="/static/search/#"><img src="/static/search/img/wo.png" /></a>
                 <div class="div">
-                    <a href="/static/search/#">子然商城会员</a>
+                    <a href="/static/search/#">孑然商城会员</a>
                 </div>
             </li>
             <li>

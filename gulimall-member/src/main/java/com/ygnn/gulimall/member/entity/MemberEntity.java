@@ -2,10 +2,10 @@ package com.ygnn.gulimall.member.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
-import lombok.Data;
 
 /**
  * 会员
@@ -92,5 +92,25 @@ public class MemberEntity implements Serializable {
 	 * 注册时间
 	 */
 	private Date createTime;
+
+	/**
+	 * Gitee账号ID
+	 */
+	private Long giteeUid;
+
+	/**
+	 * Gitee令牌
+	 */
+	private String giteeAccessToken;
+
+	/**
+	 * 微博账号ID
+	 */
+	private Long weiboUid;
+
+	/**
+	 * 微博令牌
+	 */
+	private String weiboAccessToken;
 
 }

@@ -10,6 +10,7 @@ import com.ygnn.gulimall.member.feign.CouponFeignService;
 import com.ygnn.gulimall.member.service.MemberService;
 import com.ygnn.gulimall.member.vo.MemberLoginVo;
 import com.ygnn.gulimall.member.vo.MemberRegisterVo;
+import com.ygnn.gulimall.member.vo.SocialUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,6 +35,28 @@ public class MemberController {
     @Autowired
     private CouponFeignService couponFeignService;
 
+    @PostMapping("/gitee/login")
+    public R oauthGiteeLogin(@RequestBody SocialUser socialUser){
+        MemberEntity entity = memberService.giteeLogin(socialUser);
+        if (entity != null) {
+            //TODO 1、登录成功处理
+            return R.ok().setData(entity);
+        } else {
+            return R.error(BizCodeEnume.LOGIN_ACCT_PASSWORD_EXCEPTION.getCode(), BizCodeEnume.LOGIN_ACCT_PASSWORD_EXCEPTION.getMsg());
+        }
+    }
+
+    @PostMapping("/weibo/login")
+    public R oauthWeiboLogin(@RequestBody SocialUser socialUser){
+        MemberEntity entity = memberService.weiboLogin(socialUser);
+        if (entity != null) {
+            //TODO 1、登录成功处理
+            return R.ok().setData(entity);
+        } else {
+            return R.error(BizCodeEnume.LOGIN_ACCT_PASSWORD_EXCEPTION.getCode(), BizCodeEnume.LOGIN_ACCT_PASSWORD_EXCEPTION.getMsg());
+        }
+    }
+
     @RequestMapping("/coupons")
     public R test(){
         MemberEntity member = new MemberEntity();
@@ -43,17 +66,18 @@ public class MemberController {
     }
 
     @PostMapping("/login")
-    public R Login(@RequestBody MemberLoginVo vo){
-        if (memberService.login(vo) != null) {
+    public R login(@RequestBody MemberLoginVo vo){
+        MemberEntity login = memberService.login(vo);
+        if (login != null) {
             //TODO 1、登录成功处理
-            return R.ok();
+            return R.ok().setData(login);
         } else {
             return R.error(BizCodeEnume.LOGIN_ACCT_PASSWORD_EXCEPTION.getCode(), BizCodeEnume.LOGIN_ACCT_PASSWORD_EXCEPTION.getMsg());
         }
     }
 
     @PostMapping("/register")
-    public R Register(@RequestBody MemberRegisterVo vo){
+    public R register(@RequestBody MemberRegisterVo vo){
         try {
             memberService.register(vo);
         } catch (PhoneExistException e){

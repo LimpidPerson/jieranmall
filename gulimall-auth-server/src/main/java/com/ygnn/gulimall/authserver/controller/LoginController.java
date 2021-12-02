@@ -4,6 +4,7 @@ import com.alibaba.fastjson.TypeReference;
 import com.ygnn.common.constant.AuthServerConstant;
 import com.ygnn.common.exception.BizCodeEnume;
 import com.ygnn.common.utils.R;
+import com.ygnn.common.vo.MemberResoVo;
 import com.ygnn.gulimall.authserver.feign.MemberFeignService;
 import com.ygnn.gulimall.authserver.feign.ThirdPartFeignService;
 import com.ygnn.gulimall.authserver.vo.UserLoginVo;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.Map;
@@ -41,6 +43,17 @@ public class LoginController {
 
     @Autowired
     private MemberFeignService memberFeignService;
+
+    @GetMapping("/login.html")
+    public String loginPage(HttpSession session){
+        Object attribute = session.getAttribute(AuthServerConstant.LOGIN_USER);
+        if (attribute == null) {
+            // 没登录
+            return "login";
+        } else {
+            return  "redirect:http://gulimall.com";
+        }
+    }
 
     @ResponseBody
     @GetMapping("/sms/sendcode")
@@ -125,11 +138,12 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public String login(UserLoginVo vo, RedirectAttributes redirectAttributes){
+    public String login(UserLoginVo vo, RedirectAttributes redirectAttributes, HttpSession session){
         // 调用远程服务登录接口
         R login = memberFeignService.Login(vo);
         if (login.getCode() == 0) {
-            // 成功
+            // 成功放到session中
+            session.setAttribute(AuthServerConstant.LOGIN_USER, login.getData("data", new TypeReference<MemberResoVo>(){}));
             return "redirect:http://gulimall.com";
         } else {
             Map<String, String> errors = new HashMap<>();

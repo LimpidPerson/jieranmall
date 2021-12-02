@@ -21,6 +21,10 @@
         <module>gulimall-gateway</module>
         <module>gulimall-third-party</module>
         <module>gulimall-search</module>
+        <module>gulimall-test-sso-server</module>
+        <module>gulimall-test-sso-client1</module>
+        <module>gulimall-test-sso-client2</module>
+        <module>gulimall-cart</module>
         <module>gulimall-common</module>
     </modules>
 
