@@ -15,7 +15,6 @@ spring:
         endpoint: oss-cn-shenzhen.aliyuncs.com
   redis:
     host: 192.168.134.156
-    port: 6379
   cache:
     type: redis
     redis:

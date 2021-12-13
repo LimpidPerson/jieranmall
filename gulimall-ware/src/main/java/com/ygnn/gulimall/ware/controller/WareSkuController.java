@@ -1,10 +1,12 @@
 package com.ygnn.gulimall.ware.controller;
 
+import com.ygnn.common.exception.BizCodeEnume;
 import com.ygnn.common.to.SkuHahStockVo;
 import com.ygnn.common.utils.PageUtils;
 import com.ygnn.common.utils.R;
 import com.ygnn.gulimall.ware.entity.WareSkuEntity;
 import com.ygnn.gulimall.ware.service.WareSkuService;
+import com.ygnn.gulimall.ware.vo.WareSkuLockVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,6 +28,22 @@ import java.util.Map;
 public class WareSkuController {
     @Autowired
     private WareSkuService wareSkuService;
+
+    /**
+     * 锁定库存
+     * @param vo
+     * @return
+     */
+    @PostMapping("/lock/order")
+    public R orderLockStock(@RequestBody WareSkuLockVo vo){
+        try {
+            Boolean stock = wareSkuService.orderLockStock(vo);
+            System.out.println("stock = " + stock);
+            return R.ok();
+        } catch (Exception e){
+            return R.error(BizCodeEnume.NO_STOCK_EXCEPTION.getCode(), BizCodeEnume.NO_STOCK_EXCEPTION.getMsg());
+        }
+    }
 
     /**
      * 查询sku是否有库存

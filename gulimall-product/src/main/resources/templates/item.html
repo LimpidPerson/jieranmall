@@ -57,7 +57,7 @@
 				</li>
 			</ul>
 			<ul class="header_ul_right">
-				<li style="border: 0;"><a th:if="${session.loginUser != null}">欢迎: [[${session.loginUser.nickname}]]</a><a href="http://auth.gulimall.com/login.html" th:if="${session.loginUser == null}" class="aa">你好，请登录</a></li>
+				<li style="border: 0;width: 120px"><a th:if="${session.loginUser != null}">欢迎: [[${session.loginUser.nickname}]]</a><a href="http://auth.gulimall.com/login.html" th:if="${session.loginUser == null}" class="aa">你好，请登录</a></li>
 				<li><a th:if="${session.loginUser == null}" href="http://auth.gulimall.com/reg.html" style="color: red;">免费注册</a> |</li>
 				<li><a href="javascript:;" class="aa">我的订单</a> |</li>
 				<li class="jingdong"><a href="javascript:;">我的孑然</a><span class="glyphicon glyphicon-menu-down">|</span>
@@ -608,7 +608,7 @@
 
 				<div class="box-btns clear">
 					<div class="box-btns-one">
-						<input type="text" name="" id="" value="1" />
+						<input type="text" name="" id="numInpu" value="1" />
 						<div class="box-btns-one1">
 
 							<div>
@@ -625,8 +625,8 @@
 						</div>
 					</div>
 					<div class="box-btns-two">
-						<a href="../商品分类\index.html">
-							立即预约
+						<a href="#" id="addToCartA" th:attr="skuId = ${item.info.skuId}">
+							加入购物车
 						</a>
 					</div>
 					<div class="box-btns-three">
@@ -1307,6 +1307,10 @@
 		$(".sku_attr_value").parent().css({"border":"solid 1px #CCC"});
 		$("a[class='sku_attr_value checked']").parent().css({"border":"solid 1px red"});
 	});
-</script>
 
+	$("#addToCartA").click(function (){
+		location.href = "http://cart.gulimall.com/addToCart?skuId="+ $(this).attr("skuId") +"&num="+ $("#numInpu").val();
+		return false;
+	});
+</script>
 </html>

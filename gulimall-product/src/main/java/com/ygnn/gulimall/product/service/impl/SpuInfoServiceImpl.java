@@ -19,6 +19,7 @@ import com.ygnn.gulimall.product.feign.SearchFeignService;
 import com.ygnn.gulimall.product.feign.WareFeignService;
 import com.ygnn.gulimall.product.service.*;
 import com.ygnn.gulimall.product.vo.*;
+import io.seata.spring.annotation.GlobalTransactional;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,8 +82,10 @@ public class SpuInfoServiceImpl extends ServiceImpl<SpuInfoDao, SpuInfoEntity> i
 
     /**
      * TODO 高级部分完善
+     * 这个保存适用于 Seata AT 分布式事务
      * @param vo
      */
+    @GlobalTransactional
     @Transactional
     @Override
     public void saveSpuInfo(SpuSaveVo vo) {
@@ -311,6 +314,12 @@ public class SpuInfoServiceImpl extends ServiceImpl<SpuInfoDao, SpuInfoEntity> i
 
         }
 
+    }
+
+    @Override
+    public SpuInfoEntity getSpuInfoBySkuId(Long skuId) {
+        Long spuId = skuInfoService.getById(skuId).getSpuId();
+        return getById(spuId);
     }
 
 }

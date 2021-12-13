@@ -4,6 +4,33 @@ spring:
     url: jdbc:mysql://192.168.134.156:3306/gulimall_oms
     username: root
     password: root
+  rabbitmq:
+    host: 192.168.134.156
+    # 开启发送端确认
+    publisher-confirm-type: correlated
+    # 开启发送端消息抵达队列的确认
+    publisher-returns: true
+    template:
+      # 只要抵达队列，以异步发送优先回调我们这个returnconfirm
+      mandatory: true
+    listener:
+      simple:
+        # 手动ack消息
+        acknowledge-mode: manual
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+  application:
+    name: gulimall-order
+  thymeleaf:
+    cache: false
+  session:
+    store-type: redis
+  redis:
+    host: 192.168.134.156
+  mvc:
+    date-format: yyyy-MM-dd HH:mm:ss
 
 mybatis-plus:
   mapper-locations: classpath:/mapper/**/*.xml
@@ -13,3 +40,9 @@ mybatis-plus:
 
 server:
   port: 9000
+
+gulimall:
+  thread:
+    core-size: 20
+    max-size: 200
+    keep-alive-time: 10

@@ -9,7 +9,6 @@ spring:
     cache: false
   redis:
     host: 192.168.134.156
-    port: 6379
   session:
     store-type: redis
 
