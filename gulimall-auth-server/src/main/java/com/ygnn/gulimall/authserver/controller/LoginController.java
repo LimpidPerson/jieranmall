@@ -4,7 +4,7 @@ import com.alibaba.fastjson.TypeReference;
 import com.ygnn.common.constant.AuthServerConstant;
 import com.ygnn.common.exception.BizCodeEnume;
 import com.ygnn.common.utils.R;
-import com.ygnn.common.vo.MemberResoVo;
+import com.ygnn.common.vo.MemberRespVo;
 import com.ygnn.gulimall.authserver.feign.MemberFeignService;
 import com.ygnn.gulimall.authserver.feign.ThirdPartFeignService;
 import com.ygnn.gulimall.authserver.vo.UserLoginVo;
@@ -143,7 +143,8 @@ public class LoginController {
         R login = memberFeignService.Login(vo);
         if (login.getCode() == 0) {
             // 成功放到session中
-            session.setAttribute(AuthServerConstant.LOGIN_USER, login.getData("data", new TypeReference<MemberResoVo>(){}));
+            session.setAttribute(AuthServerConstant.LOGIN_USER, login.getData("data", new TypeReference<MemberRespVo>() {
+            }));
             return "redirect:http://gulimall.com";
         } else {
             Map<String, String> errors = new HashMap<>();

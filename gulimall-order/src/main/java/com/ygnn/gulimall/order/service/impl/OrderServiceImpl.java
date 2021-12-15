@@ -7,10 +7,11 @@ import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ygnn.common.exception.NoStockException;
 import com.ygnn.common.to.mq.OrderTo;
+import com.ygnn.common.to.mq.SeckillOrderTo;
 import com.ygnn.common.utils.PageUtils;
 import com.ygnn.common.utils.Query;
 import com.ygnn.common.utils.R;
-import com.ygnn.common.vo.MemberResoVo;
+import com.ygnn.common.vo.MemberRespVo;
 import com.ygnn.gulimall.order.constant.OrderConstant;
 import com.ygnn.gulimall.order.dao.OrderDao;
 import com.ygnn.gulimall.order.entity.OrderEntity;
@@ -95,7 +96,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderDao, OrderEntity> impleme
     @Override
     public OrderConfirmVo confirmOrder() {
         OrderConfirmVo confirmVo = new OrderConfirmVo();
-        MemberResoVo memberResoVo = LoginUserInterceptor.loginUser.get();
+        MemberRespVo memberResoVo = LoginUserInterceptor.loginUser.get();
 
         //获取之前的请求
         RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
@@ -156,7 +157,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderDao, OrderEntity> impleme
     public SubmitOrderResponseVo submitOrder(OrderSubmitVo vo) {
         confirmVoThreadLocal.set(vo);
         SubmitOrderResponseVo response = new SubmitOrderResponseVo();
-        MemberResoVo memberRespVo = LoginUserInterceptor.loginUser.get();
+        MemberRespVo memberRespVo = LoginUserInterceptor.loginUser.get();
         response.setCode(0);
         // 下单: 去创建订单、验令牌、验价格、锁库存...
         //1、验证令牌
@@ -267,7 +268,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderDao, OrderEntity> impleme
 
     @Override
     public PageUtils queryPageWithItem(Map<String, Object> params) {
-        MemberResoVo memberResoVo = LoginUserInterceptor.loginUser.get();
+        MemberRespVo memberResoVo = LoginUserInterceptor.loginUser.get();
         IPage<OrderEntity> page = this.page(new Query<OrderEntity>().getPage(params), new QueryWrapper<OrderEntity>().eq("member_id", memberResoVo.getId()).orderByDesc("id"));
 
         List<OrderEntity> orderSn = page.getRecords().stream().map(item -> {
@@ -306,8 +307,29 @@ public class OrderServiceImpl extends ServiceImpl<OrderDao, OrderEntity> impleme
         return "success";
     }
 
+    @Override
+    public void createSeckillOrder(SeckillOrderTo orderTo) {
+        //TODO 保存订单信息
+        OrderEntity orderEntity = new OrderEntity();
+        orderEntity.setOrderSn(orderTo.getOrderSn());
+        orderEntity.setMemberId(orderTo.getMemberId());
+        orderEntity.setStatus(OrderStatusEnum.CREATE_NEW.getCode());
+        orderEntity.setPayAmount(orderTo.getSeckillPrice());
+        this.save(orderEntity);
+
+        //TODO 保存订单项信息
+        OrderItemEntity orderItemEntity = new OrderItemEntity();
+        orderItemEntity.setOrderSn(orderTo.getOrderSn());
+        orderItemEntity.setRealAmount(orderTo.getSeckillPrice());
+        //TODO 获取当前SKU的详细信息进行设置  productFeignService.getSpuInfoBySkuId()
+        orderItemEntity.setSkuQuantity(1);
+
+        orderItemService.save(orderItemEntity);
+    }
+
     /**
      * 保存订单数据
+     *
      * @param order
      */
     private void saveOrder(OrderCreateTo order) {
@@ -385,7 +407,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderDao, OrderEntity> impleme
      * @param orderSn
      */
     private OrderEntity buildOrder(String orderSn) {
-        MemberResoVo respVo = LoginUserInterceptor.loginUser.get();
+        MemberRespVo respVo = LoginUserInterceptor.loginUser.get();
         OrderEntity entity = new OrderEntity();
         entity.setOrderSn(orderSn);
         entity.setMemberId(respVo.getId());

@@ -5,9 +5,9 @@ import com.alibaba.fastjson.TypeReference;
 import com.ygnn.common.constant.AuthServerConstant;
 import com.ygnn.common.utils.HttpUtils;
 import com.ygnn.common.utils.R;
+import com.ygnn.common.vo.MemberRespVo;
 import com.ygnn.gulimall.authserver.feign.MemberFeignService;
 import com.ygnn.gulimall.authserver.vo.SocialUser;
-import com.ygnn.common.vo.MemberResoVo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
@@ -59,7 +59,8 @@ public class OAuth2Controller {
             }
             R r = memberFeignService.oauthGiteeLogin(socialUser);
             if (r.getCode() == 0) {
-                MemberResoVo data = r.getData("data", new TypeReference<MemberResoVo>() {});
+                MemberRespVo data = r.getData("data", new TypeReference<MemberRespVo>() {
+                });
                 log.info("登录成功,用户信息: {}", data);
                 //3、登录成功就跳回首页
                 //第一次使用session,命令浏览器保存卡号,JsessionId的cookie
@@ -99,7 +100,8 @@ public class OAuth2Controller {
             socialUser = JSON.parseObject(EntityUtils.toString(response.getEntity()), SocialUser.class);
             R r = memberFeignService.oauthWeiboLogin(socialUser);
             if (r.getCode() == 0) {
-                MemberResoVo data = r.getData("data", new TypeReference<MemberResoVo>() {});
+                MemberRespVo data = r.getData("data", new TypeReference<MemberRespVo>() {
+                });
                 log.info("登录成功,用户信息: {}", data);
                 //3、登录成功就跳回首页
                 //第一次使用session,命令浏览器保存卡号,JsessionId的cookie

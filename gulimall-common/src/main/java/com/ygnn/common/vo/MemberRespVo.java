@@ -9,7 +9,7 @@ import java.util.Date;
  * @author FangKun
  */
 @Data
-public class MemberResoVo implements Serializable {
+public class MemberRespVo implements Serializable {
 
     /**
      * id

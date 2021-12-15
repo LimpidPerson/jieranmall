@@ -2,7 +2,7 @@ package com.ygnn.gulimall.cart.interceptor;
 
 import com.ygnn.common.constant.AuthServerConstant;
 import com.ygnn.common.constant.CartConstant;
-import com.ygnn.common.vo.MemberResoVo;
+import com.ygnn.common.vo.MemberRespVo;
 import com.ygnn.gulimall.cart.vo.UserInfoTo;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Component;
@@ -37,7 +37,7 @@ public class CartInterceptor implements HandlerInterceptor {
         UserInfoTo userInfoTo = new UserInfoTo();
 
         HttpSession session = request.getSession();
-        MemberResoVo member = (MemberResoVo) session.getAttribute(AuthServerConstant.LOGIN_USER);
+        MemberRespVo member = (MemberRespVo) session.getAttribute(AuthServerConstant.LOGIN_USER);
         if (member != null){
             // 用户登录
             userInfoTo.setUserId(member.getId());

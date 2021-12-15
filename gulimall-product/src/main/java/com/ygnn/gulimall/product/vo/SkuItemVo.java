@@ -43,9 +43,14 @@ public class SkuItemVo {
      */
     private List<SpuItemAttrGroupVo> groupAttrs;
 
+    /**
+     * 当前商品的秒杀优惠信息
+     */
+    private SeckillInfoVo seckillInfo;
+
 
     @Data
-    public static class SkuItemSaleAttrVo{
+    public static class SkuItemSaleAttrVo {
 
         private Long attrId;
 

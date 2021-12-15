@@ -87,7 +87,12 @@ spring:
           predicates:
             - Host=member.gulimall.com
 
-# http://localhost:88/api/captcha.jpg  -->?? http://localhost:8080/renren-fast/captcha.jpg
+        - id: gulimall_seckill_route
+          uri: lb://gulimall-seckill
+          predicates:
+            - Host=seckill.gulimall.com
+
+  # http://localhost:88/api/captcha.jpg  -->?? http://localhost:8080/renren-fast/captcha.jpg
   application:
     name: gulimall-gateway
 

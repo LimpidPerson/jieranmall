@@ -1,15 +1,19 @@
 package com.ygnn.gulimall.product.service.impl;
 
+import com.alibaba.fastjson.TypeReference;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ygnn.common.utils.PageUtils;
 import com.ygnn.common.utils.Query;
+import com.ygnn.common.utils.R;
 import com.ygnn.gulimall.product.dao.SkuInfoDao;
 import com.ygnn.gulimall.product.entity.SkuImagesEntity;
 import com.ygnn.gulimall.product.entity.SkuInfoEntity;
 import com.ygnn.gulimall.product.entity.SpuInfoDescEntity;
+import com.ygnn.gulimall.product.feign.SeckillFeignService;
 import com.ygnn.gulimall.product.service.*;
+import com.ygnn.gulimall.product.vo.SeckillInfoVo;
 import com.ygnn.gulimall.product.vo.SkuItemVo;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +38,9 @@ public class SkuInfoServiceImpl extends ServiceImpl<SkuInfoDao, SkuInfoEntity> i
 
     @Autowired
     private AttrGroupService attrGroupService;
+
+    @Autowired
+    private SeckillFeignService seckillFeignService;
 
     @Autowired
     private SkuSaleAttrValueService skuSaleAttrValueService;
@@ -137,8 +144,18 @@ public class SkuInfoServiceImpl extends ServiceImpl<SkuInfoDao, SkuInfoEntity> i
             skuItemVo.setGroupAttrs(attrGroupVos);
         }, threadPoolExecutor);
 
+        CompletableFuture<Void> secKillFuture = CompletableFuture.runAsync(() -> {
+            //6、查询当前sku是否参与秒杀优惠
+            R r = seckillFeignService.getSkuSeckillInfo(skuId);
+            if (r.getCode() == 0) {
+                SeckillInfoVo data = r.getData(new TypeReference<SeckillInfoVo>() {
+                });
+                skuItemVo.setSeckillInfo(data);
+            }
+        }, threadPoolExecutor);
+
         try {
-            CompletableFuture.allOf(imageFuture, saleAttrFuture, descFuture, baseAttrFuture).get();
+            CompletableFuture.allOf(imageFuture, saleAttrFuture, descFuture, baseAttrFuture, secKillFuture).get();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {

@@ -498,20 +498,25 @@
 				</div>
 				<div class="box-summary clear">
 					<ul>
-						<li>孑然价</li>
-						<li>
-							<span>￥</span>
-							<span th:text="${#numbers.formatDecimal(item.info.price, 3, 2)}">4499.00</span>
-						</li>
-						<li>
-							预约享资格
-						</li>
-						<li>
-							<a href="">
-								预约说明
-							</a>
-						</li>
-					</ul>
+                        <li>孑然商城价</li>
+                        <li>
+                            <span>￥</span>
+                            <span th:text="${#numbers.formatDecimal(item.info.price, 3, 2)}">4499.00</span>
+                        </li>
+                        <li style="color: red" th:if="${item.seckillInfo != null}">
+							<span th:if="${#dates.createNow().getTime() < item.seckillInfo.startTime}">
+								商品将会在[[${#dates.format(new java.util.Date(item.seckillInfo.startTime), "yyyy-MM-dd HH:mm:ss")}]]进行秒杀
+							</span>
+                            <span th:if="${#dates.createNow().getTime() >= item.seckillInfo.startTime && #dates.createNow().getTime() <= item.seckillInfo.endTime}">
+								秒杀价：[[${#numbers.formatDecimal(item.seckillInfo.seckillPrice, 1, 2)}]]
+							</span>
+                        </li>
+                        <li>
+                            <a href="">
+                                预约说明
+                            </a>
+                        </li>
+                    </ul>
 				</div>
 				<div class="box-wrap clear">
 					<div class="box-wrap-one clear">
@@ -614,25 +619,33 @@
 							<div>
 								<button id="jia">
 									+
-								</button>
-							</div>
-							<div>
-								<button id="jian">
-									-
-								</button>
-							</div>
+                                </button>
+                            </div>
+                            <div>
+                                <button id="jian">
+                                    -
+                                </button>
+                            </div>
 
-						</div>
-					</div>
-					<div class="box-btns-two">
-						<a href="#" id="addToCartA" th:attr="skuId = ${item.info.skuId}">
-							加入购物车
-						</a>
-					</div>
-					<div class="box-btns-three">
-						<img src="/static/item/img/e4ed3606843f664591ff1f68f7fda12d.png" alt="" /> 分享
-					</div>
-				</div>
+                        </div>
+                    </div>
+                    <div class="box-btns-two"
+                         th:if="${item.seckillInfo != null && #dates.createNow().getTime() >= item.seckillInfo.startTime && #dates.createNow().getTime() <= item.seckillInfo.endTime}">
+                        <a href="#" id="seckillA"
+                           th:attr="skuId = ${item.info.skuId},sessionId=${item.seckillInfo.promotionSessionId},code=${item.seckillInfo.randomCode}">
+                            立即抢购
+                        </a>
+                    </div>
+                    <div class="box-btns-two"
+                         th:if="${item.seckillInfo == null || #dates.createNow().getTime() < item.seckillInfo.startTime || #dates.createNow().getTime() > item.seckillInfo.endTime}">
+                        <a href="#" id="addToCartA" th:attr="skuId = ${item.info.skuId}">
+                            加入购物车
+                        </a>
+                    </div>
+                    <div class="box-btns-three">
+                        <img src="/static/item/img/e4ed3606843f664591ff1f68f7fda12d.png" alt=""/> 分享
+                    </div>
+                </div>
 
 				<div class="box-footer-zo">
 					<div class="box-footer clear">
@@ -1303,14 +1316,22 @@
 		location.href = "http://item.gulimall.com/" + filterEle[0] + ".html";
 	});
 
-	$(function (){
-		$(".sku_attr_value").parent().css({"border":"solid 1px #CCC"});
-		$("a[class='sku_attr_value checked']").parent().css({"border":"solid 1px red"});
-	});
+    $(function () {
+        $(".sku_attr_value").parent().css({"border": "solid 1px #CCC"});
+        $("a[class='sku_attr_value checked']").parent().css({"border": "solid 1px red"});
+    });
 
-	$("#addToCartA").click(function (){
-		location.href = "http://cart.gulimall.com/addToCart?skuId="+ $(this).attr("skuId") +"&num="+ $("#numInpu").val();
-		return false;
-	});
+    $("#addToCartA").click(function () {
+        location.href = "http://cart.gulimall.com/addToCart?skuId=" + $(this).attr("skuId") + "&num=" + $("#numInpu").val();
+        return false;
+    });
+
+    $("#seckillA").click(function () {
+        if ([[${session.loginUser != null}]]) {
+            location.href = "http://seckill.gulimall.com/kill?killId=" + $(this).attr("sessionId") + "_" + $(this).attr("skuid") + "&key=" + $(this).attr("code")
+        } else {
+            location.href = "http://auth.gulimall.com/login.html";
+        }
+    });
 </script>
 </html>
