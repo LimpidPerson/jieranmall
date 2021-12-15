@@ -1,10 +1,10 @@
-package com.ygnn.gulimall.ssoserver;
+package com.ygnn.gulimall.seckill;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class GulimallTestSsoServerApplicationTests {
+class GulimallSeckillApplicationTests {
 
     @Test
     void contextLoads() {

@@ -1,0 +1,21 @@
+server:
+  port: 25000
+
+spring:
+  application:
+    name: gulimall-seckill
+  redis:
+    host: 192.168.134.156
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+  session:
+    store-type: redis
+  rabbitmq:
+    host: 192.168.134.156
+    virtual-host: /
+  thymeleaf:
+    cache: false
+
+

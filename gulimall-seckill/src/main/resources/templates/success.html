@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title></title>
+    <script src="http://cart.gulimall.com/static/cart/js/jquery-3.1.1.min.js" type="text/javascript"></script>
+    <script src="http://cart.gulimall.com/static/cart/bootstrap/js/bootstrap.js" type="text/javascript"></script>
+    <script src="http://cart.gulimall.com/static/cart/js/swiper.min.js" type="text/javascript"></script>
+    <script src="http://cart.gulimall.com/static/cart/js/swiper.min.js"></script>
+    <link href="http://cart.gulimall.com/static/cart/css/swiper.min.css" rel="stylesheet" type="text/css"/>
+    <link href="http://cart.gulimall.com/static/cart/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+    <link href="http://cart.gulimall.com/static/cart/css/success.css" rel="stylesheet" type="text/css"/>
+
+</head>
+
+<body>
+<!--头部-->
+<div class="alert-info">
+    <div class="hd_wrap_top">
+        <ul class="hd_wrap_left">
+            <li class="hd_home"><i class="glyphicon glyphicon-home"></i>
+                <a href="http://gulimall.com">孑然商城首页</a>
+            </li>
+
+        </ul>
+
+        <ul class="hd_wrap_right">
+            <li class="forel" style="width: 120px">
+                <a th:if="${session.loginUser != null}">欢迎: [[${session.loginUser.nickname}]]</a>
+                <a class="link_login" href="http://cart.gulimall.comhttp://auth.gulimall.com/login.html"
+                   th:if="${session.loginUser == null}">你好,请登录</a>&nbsp;
+                <a class="link_regist" href="http://cart.gulimall.comhttp://auth.gulimall.com/login.html"
+                   th:if="${session.loginUser == null}">免费注册</a>
+            </li>
+            <li class="spacer"></li>
+
+            <li>
+                <a href="http://cart.gulimall.com/javascript:;">我的订单</a>
+            </li>
+
+
+        </ul>
+
+    </div>
+</div>
+
+<div class="nav-tabs-justified">
+    <div class="nav_wrap">
+
+        <div class="nav_top">
+            <div class="nav_top_one">
+                <a href="http://cart.gulimall.comhttp://gulimall.com"><img
+                        src="http://cart.gulimall.com/static/cart/img/logo1.jpg" style="height: 60px;width:180px;"/></a>
+            </div>
+            <div class="nav_top_two"><input type="text"/>
+                <button>搜索</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="main">
+
+    <div class="success-wrap">
+        <div class="w" id="result">
+            <div class="m succeed-box">
+                <div class="mc success-cont" th:if="${orderSn != null}">
+                    <h1>恭喜！秒杀成功，订单号[[${orderSn}]]</h1><a style="color: red"
+                                                         th:href="${'http://order.gulimall.com/payOrder?orderSn=' + orderSn}">去支付</a>
+                </div>
+                <div class="mc success-cont" th:if="${orderSn == null}">
+                    <h1>手气不好，秒杀失败，下次再来吧！</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+<script src="http://cart.gulimall.com/static/cart/js/success.js" type="text/javascript"></script>
+
+</html>
